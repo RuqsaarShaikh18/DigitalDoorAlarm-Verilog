@@ -1,0 +1,56 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1539-g2693dd32b)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+S_00000227ab775920 .scope module, "DigitalDoorAlarm_tb" "DigitalDoorAlarm_tb" 2 3;
+ .timescale -9 -12;
+v00000227ab8fee80_0 .net "alarm", 0 0, L_00000227ab8faf70;  1 drivers
+v00000227ab8fef20_0 .var "door_open", 0 0;
+v00000227ab775c40_0 .var "system_armed", 0 0;
+S_00000227ab775ab0 .scope module, "uut" "DigitalDoorAlarm" 2 9, 3 1 0, S_00000227ab775920;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "system_armed";
+    .port_info 1 /INPUT 1 "door_open";
+    .port_info 2 /OUTPUT 1 "alarm";
+L_00000227ab8faf70 .functor AND 1, v00000227ab775c40_0, v00000227ab8fef20_0, C4<1>, C4<1>;
+v00000227ab774e40_0 .net "alarm", 0 0, L_00000227ab8faf70;  alias, 1 drivers
+v00000227ab7431b0_0 .net "door_open", 0 0, v00000227ab8fef20_0;  1 drivers
+v00000227ab8faed0_0 .net "system_armed", 0 0, v00000227ab775c40_0;  1 drivers
+    .scope S_00000227ab775920;
+T_0 ;
+    %vpi_call 2 16 "$dumpfile", "DigitalDoorAlarm.vcd" {0 0 0};
+    %vpi_call 2 17 "$dumpvars", 32'sb00000000000000000000000000000000, S_00000227ab775920 {0 0 0};
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000227ab775c40_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000227ab8fef20_0, 0, 1;
+    %delay 10000, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000227ab775c40_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v00000227ab8fef20_0, 0, 1;
+    %delay 10000, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v00000227ab775c40_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000227ab8fef20_0, 0, 1;
+    %delay 10000, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v00000227ab775c40_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v00000227ab8fef20_0, 0, 1;
+    %delay 10000, 0;
+    %vpi_call 2 35 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "DigitalDoorAlarm_tb.v";
+    "DigitalDoorAlarm.v";

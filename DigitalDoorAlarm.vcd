@@ -1,0 +1,38 @@
+$date
+	Thu Oct 08 23:04:55 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module DigitalDoorAlarm_tb $end
+$var wire 1 ! alarm $end
+$var reg 1 " door_open $end
+$var reg 1 # system_armed $end
+$scope module uut $end
+$var wire 1 ! alarm $end
+$var wire 1 " door_open $end
+$var wire 1 # system_armed $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+0#
+0"
+0!
+$end
+#10000
+1"
+#20000
+0"
+1#
+#30000
+1!
+1"
+#40000
