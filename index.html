@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Door Security Alarm</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#081426;color:#eaf2ff}
+header{padding:24px 7%;background:#102442;border-bottom:1px solid #294466}
+header h1{margin:0;font-size:25px}
+header p{color:#9eb8dc;margin-bottom:0}
+main{max-width:1000px;margin:30px auto;padding:0 18px}
+.card{background:#10213a;border:1px solid #294466;border-radius:16px;padding:24px;margin-bottom:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+label{display:block;margin-bottom:12px;font-weight:bold}
+button{border:0;border-radius:9px;padding:12px 18px;margin:4px;cursor:pointer;font-weight:bold;background:#294466;color:white}
+button.active{background:#1686ed}
+.status{font-size:23px;font-weight:bold;margin:14px 0}
+.alarm{font-size:25px;padding:22px;border-radius:12px;text-align:center;background:#123b35;color:#5ff0bc}
+.alarm.on{background:#561d2b;color:#ff8596;animation:pulse 1s infinite alternate}
+@keyframes pulse{to{opacity:.72}}
+table{width:100%;border-collapse:collapse;margin-top:12px}
+th,td{padding:12px;text-align:center;border-bottom:1px solid #294466}
+th{color:#8dc8ff}
+.note{color:#a9bdd8;line-height:1.6;font-size:14px}
+footer{text-align:center;padding:22px;color:#91a8c9}
+</style>
+</head>
+<body>
+<header>
+<h1>🔐 Digital Door Security Alarm</h1>
+<p>Interactive Logic Simulator | Verilog HDL Project</p>
+</header>
+<main>
+<div class="grid">
+<section class="card">
+<h2>Security System</h2>
+<label>System Armed</label>
+<button id="armed0" class="active" onclick="setArmed(0)">Disarmed</button>
+<button id="armed1" onclick="setArmed(1)">Armed</button>
+<hr style="border-color:#294466;margin:22px 0">
+<label>Door Status</label>
+<button id="door0" class="active" onclick="setDoor(0)">Door Closed</button>
+<button id="door1" onclick="setDoor(1)">Door Open</button>
+<p class="note">Choose either state to test the alarm logic.</p>
+</section>
+<section class="card">
+<h2>Live System Status</h2>
+<p>Security: <strong id="security">DISARMED</strong></p>
+<p>Door: <strong id="doorStatus">CLOSED</strong></p>
+<div id="alarm" class="alarm">● ALARM OFF</div>
+<p class="note" id="explanation">The system is disarmed.</p>
+</section>
+</div>
+<section class="card">
+<h2>Truth Table & Test Cases</h2>
+<table>
+<thead><tr><th>Armed</th><th>Door Open</th><th>Alarm</th><th>Test</th></tr></thead>
+<tbody id="truth"></tbody>
+</table>
+</section>
+<section class="card">
+<h2>Logic & Project Information</h2>
+<p><strong>Boolean Expression:</strong> Alarm = System_Armed AND Door_Open</p>
+<p class="note">The alarm activates only when both inputs are HIGH (1). This website demonstrates the same Boolean logic as the Verilog design; it does not control a physical alarm.</p>
+<p><strong>Student:</strong> Ruqsaar Shaikh</p>
+<p><strong>Roll No.:</strong> 18049</p>
+<p><strong>Technology:</strong> Verilog HDL, Icarus Verilog, GTKWave, HTML, CSS and JavaScript</p>
+</section>
+</main>
+<footer>Digital Door Security Alarm | Academic Project</footer>
+<script>
+let armed=0,door=0;
+function setArmed(v){armed=v;render()}
+function setDoor(v){door=v;render()}
+function render(){
+ document.getElementById('armed0').classList.toggle('active',armed===0);
+ document.getElementById('armed1').classList.toggle('active',armed===1);
+ document.getElementById('door0').classList.toggle('active',door===0);
+ document.getElementById('door1').classList.toggle('active',door===1);
+ document.getElementById('security').textContent=armed?'ARMED':'DISARMED';
+ document.getElementById('doorStatus').textContent=door?'OPEN':'CLOSED';
+ const on=armed&&door,box=document.getElementById('alarm');
+ box.classList.toggle('on',!!on);
+ box.textContent=on?'⚠ ALARM ON':'● ALARM OFF';
+ document.getElementById('explanation').textContent=on?'Both inputs are HIGH. The alarm is activated.':!armed?'The system is disarmed. The alarm remains OFF.': 'The door is closed. The alarm remains OFF.';
+ document.getElementById('truth').innerHTML=[[0,0],[0,1],[1,0],[1,1]].map(([a,d])=>`<tr><td>${a}</td><td>${d}</td><td>${a&d}</td><td>${a===armed&&d===door?'▶ Current':'—'}</td></tr>`).join('');
+}
+render();
+</script>
+</body>
+</html>
